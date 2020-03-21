@@ -8,13 +8,11 @@ To get the application working you'll need two API keys
 1: OpenCage Geocoder (https://opencagedata.com/)
 2: Breezometer https://breezometer.com/products/pollen-api
 
-Both provide free trial usage with limits
-
 ## Getting Started  
 
 1. Clone repository  
 2. Insert your mentioned API keys in the .env file or replace them in src/Components/WeatherWidget/index.js (Search process.env)
-.evn file example: 
+.env file example: 
 ```
 REACT_APP_BREEZOMETER_KEY = xxxxx
 REACT_APP_OPENCAGE_KEY =  xxxxxx
@@ -31,11 +29,11 @@ REACT_APP_OPENCAGE_KEY =  xxxxxx
 5. Use of Weather API
 6. Use of latest trend in react. No use of class components
 
-### Objectives Failed
+### Missing Objectives
 
 1. Accessible for screen readers
 2. Did not maintain efficient coding techniques with React lifecycles
-3. Need to improve
+
 
 ## Authors
 
