@@ -3,8 +3,6 @@ A Weather App built with ReactJS similar to Google's location weather search Res
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Weather Widget with ReactJS Assessment
-
 To get the application working you'll need two API keys 
 
 1: OpenCage Geocoder (https://opencagedata.com/)
