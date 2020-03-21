@@ -13,7 +13,7 @@ steps:
             'REACT_APP_OPENCAGE_KEY=${_REACT_APP_OPENCAGE_KEY}'
     ] 
     
-    - name: 'gcr.io/raj-c-k/firebase'
+    - name: 'gcr.io/weather-widget-app-e9668/firebase'
       dir: 'weather-app-pwc'
       args: [ 'deploy', '--only', 'hosting']
     
