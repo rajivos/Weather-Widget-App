@@ -10,9 +10,19 @@ const RowStyle = styled.div`
   }
 `;
 
-const LocationRow = props => (
-      <RowStyle onClick={()=>{props.onViewClick(props.location.lng, props.location.lat )}}>{props.name}</RowStyle>
+const LocationRow = props => {
+
+  return (
+    <RowStyle
+      onClick={() => {
+          props.onViewClick(props.location.lat, props.location.lng );
+          props.updateName(props.name)
+      }}
+    >
+      {props.name}
+    </RowStyle>
   );
+};
   
   
   export default LocationRow;

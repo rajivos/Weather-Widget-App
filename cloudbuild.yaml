@@ -10,7 +10,8 @@ steps:
       dir: 'weather-app-pwc'
       args: ['run','build'] 
       env: ['REACT_APP_BREEZOMETER_KEY=${_REACT_APP_BREEZOMETER_KEY}',
-            'REACT_APP_OPENCAGE_KEY=${_REACT_APP_OPENCAGE_KEY}'
+            'REACT_APP_OPENCAGE_KEY=${_REACT_APP_OPENCAGE_KEY}',
+            'REACT_APP_WEATHER_BIT_KEY=${_REACT_APP_WEATHER_BIT_KEY}'
     ] 
     
     - name: 'gcr.io/weather-widget-app-e9668/firebase'

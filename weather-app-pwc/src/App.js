@@ -1,11 +1,17 @@
-import React from 'react';
-import './App.css';
-import WeatherWidget from './Components/WeatherWidget'
+import React from "react";
+import "./App.css";
+import { WeatherContextProvider } from "./Components/GlobalContext";
+import LocationForm from "./Components/Location-Form";
+import Weather from "./Components/Weather";
+import "antd/dist/antd.css";
 
-function App() {
+const App= () => {
   return (
     <div className="App">
-      <WeatherWidget/>
+      <WeatherContextProvider >
+        <LocationForm />
+        <Weather />
+      </WeatherContextProvider>
     </div>
   );
 }
