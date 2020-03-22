@@ -120,7 +120,7 @@ const WeatherWidget = props => {
     }
     
     return axios({
-      url: `http://www.7timer.info/bin/civillight.php?lon=${log}&lat=${lat}&ac=0&lang=en&unit=${unit}&output=json&tzshift=${offset}`,
+      url: `https://cors-anywhere.herokuapp.com/7timer.info/bin/civillight.php?lon=${log}&lat=${lat}&ac=0&lang=en&unit=${unit}&output=json&tzshift=${offset}`,
       method
     }).then(res => {
       const { dataseries } = res.data;
