@@ -121,7 +121,11 @@ const WeatherWidget = props => {
     
     return axios({
       url: `https://cors-anywhere.herokuapp.com/7timer.info/bin/civillight.php?lon=${log}&lat=${lat}&ac=0&lang=en&unit=${unit}&output=json&tzshift=${offset}`,
-      method
+      method,
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*, *",
+    }
     }).then(res => {
       const { dataseries } = res.data;
       setWeekWeather(dataseries);
