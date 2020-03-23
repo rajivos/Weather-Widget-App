@@ -53,6 +53,13 @@ const WeekWrapper = styled.div`
   justify-content: center;
 `;
 
+const LoaderWrapper = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+text-align:center;
+height:300px;
+`
 const Weather = () => {
   const WeatherContex = useContext(WeatherContext);
 
@@ -192,7 +199,7 @@ const Weather = () => {
           </WrapperRight>
         </WrapperRow>
       ) : (
-        <div style={{textAlign:"center",marginTop:"20px"}}><Spin size="large" /></div>
+        <LoaderWrapper><Spin size="large" /></LoaderWrapper>
       )}
       {weekWeather && !loading ? <WeekWrapper>{WeekWeatherDisplay}</WeekWrapper> : null}
     </WrapperBlock>
