@@ -101,7 +101,7 @@ const Weather = () => {
         temp: data[0].temp
       });
       console.log(data);
-      toggleLoading()
+      toggleLoading(false)
       //   setHeaderData(dataseries[0]);
       // setWeekLoading(false);
     });

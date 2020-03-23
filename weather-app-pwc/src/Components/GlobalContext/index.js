@@ -50,7 +50,7 @@ const WeatherContextProvider = props => {
     updateWeekWeather: weekWeather => { setWeekWeather(weekWeather); },
     updateLocationResults: locations => { setLocationResults(locations); },
     updateCoordinates:(latitude, longitude) => {updateCoordinates(latitude, longitude)},
-    toggleLoading: ()=> { setLoading(!loading)}
+    toggleLoading: (value)=> { setLoading(value)}
   };
 
   return (

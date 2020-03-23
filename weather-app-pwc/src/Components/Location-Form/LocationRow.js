@@ -23,7 +23,7 @@ const LocationRow = props => {
       onClick={() => {
           props.onViewClick(props.location.lat, props.location.lng );
           props.updateName(props.name)
-          props.toggleLoading()
+          props.toggleLoading(true)
       }}
     >
       <RowText>{props.name}</RowText>
