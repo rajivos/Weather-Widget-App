@@ -5,15 +5,15 @@ import LocationForm from "./Components/Location-Form";
 import Weather from "./Components/Weather";
 import "antd/dist/antd.css";
 
-const App= () => {
+const App = () => {
   return (
-    <div className="App">
-      <WeatherContextProvider >
-        <LocationForm />
+    <React.Fragment>
+      <WeatherContextProvider>
         <Weather />
+        <LocationForm />
       </WeatherContextProvider>
-    </div>
+    </React.Fragment>
   );
-}
+};
 
 export default App;

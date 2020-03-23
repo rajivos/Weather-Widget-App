@@ -6,17 +6,45 @@ import { Form, Input, Button } from "antd";
 import LocationRow from "./LocationRow";
 import { WeatherContext } from "../GlobalContext";
 
-const FormWrapper = styled(Form)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex-direction: column;
-  width: 100%;
-  text-align: center;
-  margin: 5% 0;
-  min-height: 20px;
+const Wrapper = styled.div`
+margin:20px auto;
+padding:20px;
+width:100%;
+max-width:400px;
+
+@media (max-width: 520px) {
+  flex-direction:column;
+  padding:5px;
+
+}
 `;
+
+const FormWrapper = styled(Form)`
+display:flex;
+flex-direction:row;
+
+@media (max-width: 520px) {
+  flex-direction:column;
+}
+`
+const LocationInput = styled(Input)`
+`
+
+const LocationResultWrapper = styled.div``;
+
+const UlWrapper = styled.ul`
+list-style-type:decimal;
+padding: 0 15px;
+margin:0;
+`;
+
+const ButtonContainer = styled.div`
+margin-left:auto
+`
+
+const ButtonWrapper = styled(Button)`
+
+`
 
 const LocationForm = props => {
   const WeatherContex = useContext(WeatherContext);
@@ -28,7 +56,7 @@ const LocationForm = props => {
       location={location.geometry}
       onViewClick={WeatherContex.state.updateCoordinates}
       updateName={WeatherContex.state.updateLocation}
-      
+      toggleLoading={WeatherContex.state.toggleLoading}
     />
   ));
 
@@ -38,13 +66,13 @@ const LocationForm = props => {
       url: `https://api.opencagedata.com/geocode/v1/json?q=${locationName}&key=${process.env.REACT_APP_OPENCAGE_KEY}`,
       method
     }).then(res => {
-        WeatherContex.state.updateLocationResults(res.data.results);
+      WeatherContex.state.updateLocationResults(res.data.results);
     });
   }
 
   const onFinish = values => {
     console.log("Success:", values);
-    findLatandLongByName(values.location)
+    findLatandLongByName(values.location);
   };
 
   const onFinishFailed = errorInfo => {
@@ -52,20 +80,31 @@ const LocationForm = props => {
   };
 
   return (
-    <FormWrapper
-      name="basic"
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-    >
-      <Form.Item label="Location" name="location" rules={[ { required: true, message: "Insert Location!" } ]} >
-        <Input />
-      </Form.Item>
-      <Form.Item> <Button type="primary" htmlType="submit">
-         {" "} Search{" "} </Button> </Form.Item>
-      {WeatherContex.state.locationResults.length > 0 ? (
-        <div>{Locations}</div>
-      ) : null}
-    </FormWrapper>
+    <Wrapper>
+      <FormWrapper
+        name="basic"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
+        <Form.Item
+          label="Location:"
+          name="location"
+          rules={[{ required: true, message: "Insert Location!" }]}
+        >
+          <LocationInput type="text" />
+        </Form.Item>
+        <ButtonContainer>
+          <ButtonWrapper type="primary" htmlType="submit">
+            Search
+          </ButtonWrapper>
+          </ButtonContainer>
+      </FormWrapper>
+      <LocationResultWrapper>
+        {WeatherContex.state.locationResults.length > 0 ? (
+          <UlWrapper>{Locations}</UlWrapper>
+        ) : null}
+      </LocationResultWrapper>
+    </Wrapper>
   );
 };
 

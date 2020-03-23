@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import moment from "moment";
-import { Switch } from "antd";
+import { Switch, Spin } from "antd";
 
 import { WeatherContext } from "../GlobalContext";
 
@@ -20,18 +20,29 @@ const WrapperRight = styled.div`
   @media (max-width: 720px) {
     padding-right: 0px;
   }
+  display:flex;
+  flex-direction:column;
+  text-align:left;
 `;
 
 const WrapperBlock = styled.div`
-margin:0 auto;
+margin:5px auto;
+padding:5px;
 max-width:750px;
 width:100%:
+display:flex;
+flex-direction:row;
 `;
+
+const MetricWrapper = styled.div`
+display:flex;
+justify-content:flex-start;
+margin:5px 0 0 0;
+`
 
 const WrapperRow = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px 5px 30px 5px;
 `;
 
 const WeekWrapper = styled.div`
@@ -55,6 +66,9 @@ const Weather = () => {
   const updateWeekWeather = WeatherContex.state.updateWeekWeather;
   const metric = WeatherContex.state.metric;
 
+  const loading = WeatherContex.state.loading;
+  const toggleLoading = WeatherContex.state.toggleLoading
+
   const switchUnit = WeatherContex.state.switchUnit;
 
   const getWeekWeather = async (lat, long) => {
@@ -66,7 +80,7 @@ const Weather = () => {
     if (metric) {
       unit = "M";
     }
-    axios({
+    return axios({
       url: `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=${process.env.REACT_APP_WEATHER_BIT_KEY}&units=${unit}`,
       method,
       headers: {
@@ -87,6 +101,7 @@ const Weather = () => {
         temp: data[0].temp
       });
       console.log(data);
+      toggleLoading()
       //   setHeaderData(dataseries[0]);
       // setWeekLoading(false);
     });
@@ -94,6 +109,7 @@ const Weather = () => {
   useEffect(
     () => {
       console.log("position updated");
+      console.log(loading)
       getWeekWeather(latitude, longitude);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -147,18 +163,20 @@ const Weather = () => {
 
   return (
     <WrapperBlock>
-      {currentConditions ? (
+      {currentConditions && !loading ? (
         <WrapperRow>
           <WrapperLeft>
-            <Switch
+            <TopHeading />
+          </WrapperLeft>
+          <WrapperRight>
+          <MetricWrapper>
+                <h3 style={{ paddingRight:"5px"}}>Unit:</h3> 
+                <div> <Switch
               checkedChildren="Metric"
               unCheckedChildren="British"
               defaultChecked
               onChange={() => switchUnit(!metric)}
-            />
-            <TopHeading />
-          </WrapperLeft>
-          <WrapperRight>
+            /></div></MetricWrapper>
             <div>Precipitation: {currentConditions.precipitation}%</div>
             <div>Humitidy: {currentConditions.humidity}%</div>
             <div>
@@ -174,9 +192,9 @@ const Weather = () => {
           </WrapperRight>
         </WrapperRow>
       ) : (
-        <div>Loading</div>
+        <div style={{textAlign:"center",marginTop:"20px"}}><Spin size="large" /></div>
       )}
-      {weekWeather ? <WeekWrapper>{WeekWeatherDisplay}</WeekWrapper> : null}
+      {weekWeather && !loading ? <WeekWrapper>{WeekWeatherDisplay}</WeekWrapper> : null}
     </WrapperBlock>
   );
 };

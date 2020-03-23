@@ -19,6 +19,7 @@ const WeatherContextProvider = props => {
 
   const [locationResults, setLocationResults] = useState([]);
 
+  const [loading, setLoading] = useState([true])
   
   const updateCoordinates = (latitude, longitude) => {
         setLatitude(latitude)
@@ -39,6 +40,7 @@ const WeatherContextProvider = props => {
     weekWeather,
     locationResults,
     offset,
+    loading,
 
     updateLatitude: value => { setLatitude(value); },
     updateLongitude: value => { setLongitude(value); },
@@ -47,7 +49,8 @@ const WeatherContextProvider = props => {
     updateCurrentConditions: daysConditions => { setCurrentConditions(daysConditions); },
     updateWeekWeather: weekWeather => { setWeekWeather(weekWeather); },
     updateLocationResults: locations => { setLocationResults(locations); },
-    updateCoordinates:(latitude, longitude) => {updateCoordinates(latitude, longitude)}
+    updateCoordinates:(latitude, longitude) => {updateCoordinates(latitude, longitude)},
+    toggleLoading: ()=> { setLoading(!loading)}
   };
 
   return (
