@@ -168,24 +168,16 @@ const Weather = () => {
     }
   };
 
-  const unit = () => { 
-    const stateUnit = metric;
-
-    return (
-        <h2></h2>
-    )
-  }
-
   return (
     <WrapperBlock>
                 <MetricWrapper>
                 
-                <div style={{ display: "inline-block"}}> <span>Unit:</span>  <Switch
+                 <span style={{paddingRight:"5px"}}>Unit:</span>  <Switch
               checkedChildren="Metric"
               unCheckedChildren="British"
               defaultChecked
               onChange={() => switchUnit(!metric)}
-            /> </div></MetricWrapper>
+            /></MetricWrapper>
 
       {currentConditions && !loading ? (
         <WrapperRow>
