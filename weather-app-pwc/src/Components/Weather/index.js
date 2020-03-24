@@ -78,7 +78,7 @@ const Weather = () => {
 
   const switchUnit = WeatherContex.state.switchUnit;
 
-  const getWeekWeather = async (lat, long) => {
+  const getWeekWeather = async (lat, long, metric) => {
     if (!long || !lat) {
       return;
     }
@@ -117,7 +117,7 @@ const Weather = () => {
     () => {
       console.log("position updated");
       console.log(loading)
-      getWeekWeather(latitude, longitude);
+      getWeekWeather(latitude, longitude,metric);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [latitude, longitude, metric]
@@ -168,22 +168,32 @@ const Weather = () => {
     }
   };
 
+  const unit = () => { 
+    const stateUnit = metric;
+
+    return (
+        <h2></h2>
+    )
+  }
+
   return (
     <WrapperBlock>
+                <MetricWrapper>
+                
+                <div style={{ display: "inline-block"}}> <span>Unit:</span>  <Switch
+              checkedChildren="Metric"
+              unCheckedChildren="British"
+              defaultChecked
+              onChange={() => switchUnit(!metric)}
+            /> </div></MetricWrapper>
+
       {currentConditions && !loading ? (
         <WrapperRow>
           <WrapperLeft>
             <TopHeading />
           </WrapperLeft>
           <WrapperRight>
-          <MetricWrapper>
-                <h3 style={{ paddingRight:"5px"}}>Unit:</h3> 
-                <div> <Switch
-              checkedChildren="Metric"
-              unCheckedChildren="British"
-              defaultChecked
-              onChange={() => switchUnit(!metric)}
-            /></div></MetricWrapper>
+
             <div>Precipitation: {currentConditions.precipitation}%</div>
             <div>Humitidy: {currentConditions.humidity}%</div>
             <div>

@@ -24,6 +24,7 @@ const WeatherContextProvider = props => {
   const updateCoordinates = (latitude, longitude) => {
         setLatitude(latitude)
         setLongitude(longitude)
+        console.log(`${metric} + ${stateLatitude} + ${stateLongitude}`)
   }
 
   useEffect(() => {
