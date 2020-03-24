@@ -168,6 +168,11 @@ const Weather = () => {
     }
   };
 
+  const changeMetric = () => {
+    switchUnit(!metric)
+    toggleLoading(true)
+  }
+
   return (
     <WrapperBlock>
                 <MetricWrapper>
@@ -176,7 +181,7 @@ const Weather = () => {
               checkedChildren="Metric"
               unCheckedChildren="British"
               defaultChecked
-              onChange={() => switchUnit(!metric)}
+              onChange={() => changeMetric() }
             /></MetricWrapper>
 
       {currentConditions && !loading ? (
