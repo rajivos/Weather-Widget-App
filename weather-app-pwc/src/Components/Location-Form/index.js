@@ -71,7 +71,6 @@ const LocationForm = props => {
   }
 
   const onFinish = values => {
-    console.log("Success:", values);
     findLatandLongByName(values.location);
   };
 

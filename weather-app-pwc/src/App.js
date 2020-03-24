@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import { WeatherContextProvider } from "./Components/GlobalContext";
 import LocationForm from "./Components/Location-Form";
 import Weather from "./Components/Weather";

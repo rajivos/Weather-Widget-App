@@ -15,14 +15,15 @@ const WrapperLeft = styled.div`
 `;
 
 const WrapperRight = styled.div`
-  padding-right: 200px;
+  padding-right: 100px;
   padding-top: 100px;
-  @media (max-width: 720px) {
-    padding-right: 0px;
-  }
   display:flex;
   flex-direction:column;
   text-align:left;
+
+  @media (max-width: 720px) {
+    padding-right: 0px;
+  }
 `;
 
 const WrapperBlock = styled.div`
@@ -60,6 +61,26 @@ justify-content: center;
 text-align:center;
 height:300px;
 `
+
+const DayImageWrapper = styled.img`
+height: "80px", 
+width: "80px", 
+vertica-align: "bottom"
+
+@media (max-width: 720px) {
+  height: 40px;
+  width: 40px; 
+}
+`
+const DayTempWrapper = styled.span`
+ font-size: 38px;
+ vertical-align: top;
+ @media (max-width: 720px) {
+  font-size: 28px" 
+}
+
+`
+
 const Weather = () => {
   const WeatherContex = useContext(WeatherContext);
 
@@ -107,16 +128,11 @@ const Weather = () => {
         icon: data[0].weather.icon,
         temp: data[0].temp
       });
-      console.log(data);
       toggleLoading(false)
-      //   setHeaderData(dataseries[0]);
-      // setWeekLoading(false);
     });
   };
   useEffect(
     () => {
-      console.log("position updated");
-      console.log(loading)
       getWeekWeather(latitude, longitude,metric);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -153,15 +169,14 @@ const Weather = () => {
               {currentConditions.description}
             </span>
             <br></br>
-            <img
-              style={{ height: "80px", width: "80px", verticalAlign: "bottom" }}
+            <DayImageWrapper
               alt="Scattered showers"
               src={icon}
-            ></img>
-            <span style={{ fontSize: "38px", verticalAlign: "top" }}>
+            ></DayImageWrapper>
+            <DayTempWrapper >
               {currentConditions.temp}{" "}
-              {metric ? <span>° C</span> : <span>° F </span>}
-            </span>
+              {metric ?<span>°C</span>:<span>°F</span>}
+            </DayTempWrapper>
           </div>
         </div>
       );
@@ -198,7 +213,7 @@ const Weather = () => {
               {metric ? (
                 <span> {(currentConditions.wind * 3.6).toFixed(2)} km/h</span>
               ) : (
-                <span> {currentConditions.wind.toFixed(2)}mph </span>
+                <span> {currentConditions.wind.toFixed(2)} mph </span>
               )}{" "}
               {currentConditions.windDirection}
             </div>
