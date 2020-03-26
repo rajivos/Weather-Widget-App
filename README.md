@@ -7,8 +7,8 @@ A Weather App built with ReactJS similar to Google's location weather search cap
 
 To get the application working you'll need two API keys 
 
-1: OpenCage Geocoder (https://opencagedata.com/)
-2: Weather Bit (www.weatherbit.io/)
+1: OpenCage Geocoder (https://opencagedata.com/) --->  Grabs lat and longitude for desired location
+2: Weather Bit (www.weatherbit.io/) ---> Grabs  weather schedule for desired latitude and longitude
 
 ## Getting Started  
 
@@ -16,8 +16,8 @@ To get the application working you'll need two API keys
 2. Insert your mentioned API keys in the .env file or replace them where necesssary.
 .env file example: 
 ```
-REACT_APP_WEATHER_BIT_KEY = xxxxx
-REACT_APP_OPENCAGE_KEY =  xxxxxx
+REACT_APP_WEATHER_BIT_KEY = xxxx
+REACT_APP_WEATHER_BIT_KEY = xxxx
 ```
 3. cd into weather-app-pwc and  ``` npm install && npm start``` 
 
@@ -30,9 +30,11 @@ REACT_APP_OPENCAGE_KEY =  xxxxxx
 4. Switch between Imperial/metrics units
 5. Gets week weather in current location (onLoad)
 6. Efficient use of React Standards and libraries (use of context-api as global container and no usage of class components)
+7. Implemented CI/CD with Cloud build 
+8. Using Jest to Test API functionality. (see App.test.js)
 
 
-### Missed Objectives
+### Pending Objectives
 
 1. Accessible for screen readers
 
