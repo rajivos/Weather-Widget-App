@@ -21,8 +21,7 @@ const LocationRow = props => {
   return (
     <RowStyle
       onClick={() => {
-          props.onViewClick(props.location.lat, props.location.lng );
-          props.updateName(props.name)
+          props.onViewClick(props.location.lat, props.location.lng);
           props.toggleLoading(true)
       }}
     >

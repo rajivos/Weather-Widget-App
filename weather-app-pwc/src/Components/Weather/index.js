@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import moment from "moment";
 import { Switch, Spin } from "antd";
+import { getForecast } from "../APIs/getForecast"
 
 import { WeatherContext } from "../GlobalContext";
 
@@ -85,6 +85,7 @@ const Weather = () => {
   const WeatherContex = useContext(WeatherContext);
 
   const locationName = WeatherContex.state.locationName;
+  const updateLocation = WeatherContex.state.updateLocation;
 
   const latitude = WeatherContex.state.stateLatitude;
   const longitude = WeatherContex.state.stateLongitude;
@@ -103,20 +104,12 @@ const Weather = () => {
     if (!long || !lat) {
       return;
     }
-    const method = "GET";
     let unit = "I";
     if (metric) {
       unit = "M";
     }
-    return axios({
-      url: `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${long}&key=${process.env.REACT_APP_WEATHER_BIT_KEY}&units=${unit}`,
-      method,
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*, *"
-      }
-    }).then(res => {
-      const { data } = res.data;
+    return getForecast(lat, long, unit).then(res => {
+      const { data, city_name  } = res.data;
       updateWeekWeather(data.slice(0, 7));
       updateCurrentConditions({
         precipitation: data[0].pop,
@@ -128,6 +121,7 @@ const Weather = () => {
         icon: data[0].weather.icon,
         temp: data[0].temp
       });
+      updateLocation(city_name)
       toggleLoading(false)
     });
   };

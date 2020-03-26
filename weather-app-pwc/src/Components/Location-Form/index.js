@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import { Form, Input, Button } from "antd";
-
 import LocationRow from "./LocationRow";
 import { WeatherContext } from "../GlobalContext";
+
+import { getCoordinatesByName } from "../APIs/getCoordinatesByName"
 
 const Wrapper = styled.div`
 margin:20px auto;
@@ -46,7 +46,7 @@ const ButtonWrapper = styled(Button)`
 
 `
 
-const LocationForm = props => {
+const LocationForm = () => {
   const WeatherContex = useContext(WeatherContext);
 
   const Locations = WeatherContex.state.locationResults.map(location => (
@@ -55,17 +55,12 @@ const LocationForm = props => {
       name={location.formatted}
       location={location.geometry}
       onViewClick={WeatherContex.state.updateCoordinates}
-      updateName={WeatherContex.state.updateLocation}
       toggleLoading={WeatherContex.state.toggleLoading}
     />
   ));
 
   function findLatandLongByName(locationName) {
-    const method = "GET";
-    return axios({
-      url: `https://api.opencagedata.com/geocode/v1/json?q=${locationName}&key=${process.env.REACT_APP_OPENCAGE_KEY}`,
-      method
-    }).then(res => {
+    return getCoordinatesByName(locationName).then(res => {
       WeatherContex.state.updateLocationResults(res.data.results);
     });
   }
