@@ -22,7 +22,6 @@ const LocationRow = props => {
     <RowStyle
       onClick={() => {
           props.onViewClick(props.location.lat, props.location.lng);
-          props.toggleLoading(true)
       }}
     >
       <RowText>{props.name}</RowText>

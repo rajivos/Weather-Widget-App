@@ -59,7 +59,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 text-align:center;
-height:300px;
+height:320px;
 `
 
 const DayImageWrapper = styled.img`
@@ -104,6 +104,7 @@ const Weather = () => {
     if (!long || !lat) {
       return;
     }
+    toggleLoading(true)
     let unit = "I";
     if (metric) {
       unit = "M";
