@@ -40,4 +40,4 @@ REACT_APP_WEATHER_BIT_KEY = xxxx
 
 ## Authors
 
-* **Rajiv Khushiram** - *Carving my own path through hardwork and dedication* - (https://raj-c-k.web.app/) 
+*- (https://raj-c-k.web.app/) 
