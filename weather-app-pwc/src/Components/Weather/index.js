@@ -212,7 +212,6 @@ const Weather = () => {
               )}{" "}
               {currentConditions.windDirection}
             </div>
-            <br></br>
           </WrapperRight>
         </WrapperRow>
       ) : (
